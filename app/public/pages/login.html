@@ -1,0 +1,30 @@
+<div ng-controller="LoginController as lc" class="text-center">
+  <h1>Welcome!</h1>
+  <p>Current step is: {{ lc.currentStep }}</p>
+  <p>Selecting a group: {{ lc.selectGroup }}</p>
+  <div ng-switch="lc.currentStep">
+    <div ng-switch-when="group">
+      <div ng-if="lc.selectGroup">
+        <h3>Which group do you want to join?</h3>
+        <select ng-model='lc.groupName' ng-options='g as g for g in lc.allGroupNames'></select>
+        <p>group is {{lc.groupName}}</p>
+      </div>
+      <div ng-if="!lc.selectGroup">
+        <h3>Create a new group</h3>
+        <p>Group name</p>
+        <input ng-model='lc.createdGroupName' type="text" name="groupName">
+        <p>Max number of members?</p>
+        <input ng-model='lc.maxNumMembers' type='number'>
+      </div>
+      <button class='btn btn-primary btn-small' ng-click='lc.selectGroup = !lc.selectGroup'>{{lc.selectGroup ? 'Create a group' : 'Select a group'}}</button>
+    </div>
+
+    <div ng-switch-when="username">
+      <h3>Create a user name</h3>
+      <input type="text" name="username" ng-model='lc.username'>
+    </div>
+    <button class='btn btn-primary' ng-click='lc.nextStep()'>{{lc.currentStepText}}</button>
+
+  </div>
+
+</div>

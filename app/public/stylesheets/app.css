@@ -1,0 +1,46 @@
+/* app css stylesheet */
+
+body, html {
+  background-color: #d8d8d8 !important;
+  padding: 0px;
+}
+
+#main {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+input[type='text'] {
+    width: 400px;
+    padding: 6px 16px;
+    margin: 20px 10px;
+    border: none;
+    border-bottom: 3px solid #AE0C00;
+    font-size: large;
+    text-align: center;
+}
+input[type='number'] {
+    width: 100px;
+    padding: 6px 16px;
+    margin: 20px 10px;
+    border: none;
+    border-bottom: 3px solid #AE0C00;
+    font-size: large;
+    text-align: center;
+}
+
+#nav-bar {
+  height: 70px;
+  width: 100%;
+  background-color: #62929E !important;
+  margin: 0px;
+  padding: 10px;
+}
+
+#nav-bar #username {
+    font-size: 24px;
+    margin-top: 6px;
+}
+#nav-bar .title {
+    font-size: 30px;
+}

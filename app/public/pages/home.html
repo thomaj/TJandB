@@ -1,0 +1,13 @@
+<div ng-controller="HomeController as hm" class="text-center">
+  <div id='nav-bar'>
+    <span id='username' class='col-md-3'>Welcome, {{ hm.username }}</span>
+    <span class='title col-md-6'>Tunes, James, and Bangers</span>
+    <span class='col-md-3'>
+      <md-button class="md-primary md-raised" ng-click="hm.toggleAudio($event)" >
+      {{playingAudio ? 'Stop Music' : 'Play Music'}}
+      </md-button>
+    </span>
+  </div>
+
+
+</div>
