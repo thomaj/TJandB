@@ -2,6 +2,7 @@
   <h1>Welcome!</h1>
   <p>Current step is: {{ lc.currentStep }}</p>
   <p>Selecting a group: {{ lc.selectGroup }}</p>
+  <p>Group name: {{ lc.createdGroupName }}</p>
   <div ng-switch="lc.currentStep">
     <div ng-switch-when="group">
       <div ng-if="lc.selectGroup">
@@ -16,14 +17,14 @@
         <p>Max number of members?</p>
         <input ng-model='lc.maxNumMembers' type='number'>
       </div>
-      <button class='btn btn-primary btn-small' ng-click='lc.selectGroup = !lc.selectGroup'>{{lc.selectGroup ? 'Create a group' : 'Select a group'}}</button>
+      <button class='btn btn-primary btn-small' ng-click='lc.selectGroup = !lc.selectGroup; lc.checkPermission();'>{{lc.selectGroup ? 'Create a group' : 'Select a group'}}</button>
     </div>
 
     <div ng-switch-when="username">
       <h3>Create a user name</h3>
       <input type="text" name="username" ng-model='lc.username'>
     </div>
-    <button class='btn btn-primary' ng-click='lc.nextStep()'>{{lc.currentStepText}}</button>
+    <button class='btn btn-primary' ng-click='lc.nextStep()' ng-show='lc.canShowUsernameBtn'>{{lc.currentStepText}}</button>
 
   </div>
 

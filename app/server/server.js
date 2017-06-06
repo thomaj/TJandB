@@ -28,6 +28,7 @@ globals.allGroups['first group'] = new Group('first group', globals.ids++);
 // ----------------------------- Socket.io operations ------------------------------ //
 var updateSocket = function (socket, user, group) {
   socket.memberInfo = user;
+  socket.join(group.socketIORoom);
   io.to(socket.id).emit('successful join', {user: user, group: group});
 }
 
@@ -46,6 +47,7 @@ io.on('connection', function (socket){
       var user = actions.join(socket.memberInfo, username, group, socket, io);
       updateSocket(socket, user, group);
       console.log('Created user: ' + socket.memberInfo);
+      socket.to(group.socketIORoom).emit('group update', {group: group})
     } else {
       console.log('The group "' + data.groupName +'" does not exist or the username "' + data.username + '" has been taken');
       // Let them know something has happened

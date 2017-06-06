@@ -3,17 +3,18 @@ angular.module('app')
 .service('connectionService', ['$rootScope', '$location', '$http', function ($rootScope, $location, $http) {
   var socket = io();
 
-  return {
+  var service = {
     getAllGroups: function (obj, cb) {
       $http.get('api/getAllGroups').then(function (response) {
         console.log(response.data.groups);
         cb(obj, response.data.groups);
       });
     },
-    on: function (eventName, callback) {
+    on: function (eventName, callback, scope) {
+      if(!scope) scope = $rootScope;
       socket.on(eventName, function () {
         var args = arguments;
-        $rootScope.$apply(function () {
+        scope.$apply(function () {
           callback.apply(socket, args);
         });
       });
@@ -30,4 +31,6 @@ angular.module('app')
     }
 
   }
+
+  return service;
 }])

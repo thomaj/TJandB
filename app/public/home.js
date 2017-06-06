@@ -1,8 +1,12 @@
 'use strict'
 angular.module('app')
-.controller('HomeController', ['$scope', '$mdDialog', 'connectionService', function ($scope, $mdDialog, concSvc) {
+.controller('HomeController', ['$scope', '$mdDialog', 'connectionService', 'dataService', function ($scope, $mdDialog, concSvc, dataSvc) {
   $scope.playingAudio = false
-  this.username = 'Sam';
+  this.username = dataSvc.userInfo().name;
+
+  dataSvc.onUserChange.watch('home', function (data) {
+    this.username = data.user.name;
+  })
 
   this.showConfirm = function (ev) {
     var confirm = $mdDialog.confirm()
