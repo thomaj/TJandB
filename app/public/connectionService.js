@@ -1,6 +1,6 @@
 'use strict'
 angular.module('app')
-.service('connectionService', ['$rootScope', '$location', '$http', function ($rootScope, $location, $http) {
+.service('connectionService', ['$location', '$http', 'appManager', function ($location, $http, appManager) {
   var socket = io();
 
   var service = {
@@ -10,23 +10,20 @@ angular.module('app')
         cb(obj, response.data.groups);
       });
     },
-    on: function (eventName, callback, scope) {
-      if(!scope) scope = $rootScope;
+    on: function (eventName, callback) {
       socket.on(eventName, function () {
         var args = arguments;
-        scope.$apply(function () {
-          callback.apply(socket, args);
-        });
+        callback.apply(socket, args);
+        appManager.update();
       });
     },
     emit: function (eventName, data, callback) {
       socket.emit(eventName, data, function () {
         var args = arguments;
-        $rootScope.$apply(function () {
-          if (callback) {
-            callback.apply(socket, args);
-          }
-        });
+        if (callback) {
+          callback.apply(socket, args);
+        }
+        appManager.update();
       });
     }
 

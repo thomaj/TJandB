@@ -38,14 +38,14 @@ angular.module('app')
     restrict: 'E',
     templateUrl: 'public/pages/groupStats.html',
     controller: ['$scope', 'connectionService', 'dataService', function ($scope, concSvc, dataSvc) {
-      this.group = 'Nothing';
+      $scope.group = dataSvc.groupInfo();
 
       // Set up event handlers --------------------
       concSvc.on('group update', function (data) {
-        this.group = data
+        $scope.group = data.group;
         console.log('Group was updated')
         console.log(data)
-      }, $scope);
+      });
 
     }],
     controllerAs: 'g'

@@ -25,3 +25,14 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
   }).otherwise({redirectTo: '/home'});
 
 }]);
+
+app.factory('appManager', ['$rootScope', function ($rootScope) {
+  return {
+    update: function () {
+      console.log('Updating!');
+      if (!$rootScope.$$phase) {
+        $rootScope.$apply();
+      }
+    }
+  };
+}]);
