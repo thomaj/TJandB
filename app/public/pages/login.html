@@ -7,13 +7,13 @@
     <div ng-switch-when="group">
       <div ng-if="lc.selectGroup">
         <h3>Which group do you want to join?</h3>
-        <select ng-model='lc.groupName' ng-options='g as g for g in lc.allGroupNames'></select>
+        <select ng-model='lc.groupName' ng-options='g as g for g in lc.allGroupNames' autofocus></select>
         <p>group is {{lc.groupName}}</p>
       </div>
       <div ng-if="!lc.selectGroup">
         <h3>Create a new group</h3>
         <p>Group name</p>
-        <input ng-model='lc.createdGroupName' type="text" name="groupName">
+        <input ng-model='lc.createdGroupName' type="text" name="groupName" autofocus>
         <p>Max number of members?</p>
         <input ng-model='lc.maxNumMembers' type='number'>
       </div>
@@ -22,7 +22,7 @@
 
     <div ng-switch-when="username">
       <h3>Create a user name</h3>
-      <input type="text" name="username" ng-model='lc.username'>
+      <input type="text" name="username" ng-model='lc.username' autofocus>
     </div>
     <button class='btn btn-primary' ng-click='lc.nextStep()' ng-show='lc.canShowUsernameBtn'>{{lc.currentStepText}}</button>
 

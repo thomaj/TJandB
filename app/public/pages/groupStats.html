@@ -1,3 +1,9 @@
-<div>
-  <p>The users are: {{group.members}}</p>
+<div id='group-box'>
+  <h3> {{group.name}}</h3>
+  <br>
+  <h4>Members</h4>
+  <ul>
+    <li ng-repeat='user in group.members'>
+      <p>{{user.name}}</p>
+    </li>
 </div>

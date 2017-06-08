@@ -25,8 +25,8 @@ function Group(name, idNum, maxNumMembers){
   // member: a member object
   this.removeMember = function (member) {
     for (var i = 0; i < this.members.length; i++){
-      if (this.members[i].name = member.name) {
-        this.members.splice(i, 1);
+      if (this.members[i].name == member.name) {
+        var removed = this.members.splice(i, 1);
         member.group == null;
         break;
       }

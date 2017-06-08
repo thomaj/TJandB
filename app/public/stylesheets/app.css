@@ -10,6 +10,8 @@ body, html {
     margin: 0px !important;
 }
 
+/*******************   Login Page   ***********************/
+
 input[type='text'] {
     width: 400px;
     padding: 6px 16px;
@@ -29,8 +31,10 @@ input[type='number'] {
     text-align: center;
 }
 
+/*******************   Home Page   ***********************/
+
 #nav-bar {
-  height: 70px;
+  height: 10vh;
   width: 100%;
   background-color: #62929E !important;
   margin: 0px;
@@ -43,4 +47,16 @@ input[type='number'] {
 }
 #nav-bar .title {
     font-size: 30px;
+}
+
+
+
+/*******************   Group Area   ***********************/
+
+#group-box {
+  height: 90vh;
+  background: coral;
+  width: 160px;
+  float: left;
+
 }

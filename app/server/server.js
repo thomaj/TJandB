@@ -29,7 +29,6 @@ globals.allGroups['first group'] = new Group('first group', globals.ids++);
 var updateSocket = function (socket, user, group) {
   socket.memberInfo = user;
   socket.join(group.socketIORoom);
-  io.to(socket.id).emit('successful join', {user: user, group: group});
 }
 
 
@@ -47,7 +46,8 @@ io.on('connection', function (socket){
       var user = actions.join(socket.memberInfo, username, group, socket, io);
       updateSocket(socket, user, group);
       console.log('Created user: ' + socket.memberInfo);
-      socket.to(group.socketIORoom).emit('group update', {group: group})
+      io.to(socket.id).emit('successful join', {user: user, group: group});
+      socket.to(group.socketIORoom).emit('group update', {group: group});
     } else {
       console.log('The group "' + data.groupName +'" does not exist or the username "' + data.username + '" has been taken');
       // Let them know something has happened
@@ -75,6 +75,8 @@ io.on('connection', function (socket){
       // Add this user to the group as well
       var user = actions.join(socket.memberInfo, username, newGroup, socket, io);
       updateSocket(socket, user, newGroup);
+      io.to(socket.id).emit('successful join', {user: user, group: newGroup});
+      socket.to(newGroup.socketIORoom).emit('group update', {group: newGroup});
 
     } else {
       console.log('Attempted to create group which already existed');
@@ -131,7 +133,8 @@ io.on('connection', function (socket){
       var mem = socket.memberInfo;
       var group = globals.allGroups[mem.group]
       if(group){
-        group.removeMember(socket.memberInfo);
+        group.removeMember(mem);
+        socket.to(group.socketIORoom).emit('group update', {group: group});
       }
     }
   });
